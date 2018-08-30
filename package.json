@@ -1,0 +1,9 @@
+{
+  "name": "ha-algorithm-practice",
+  "version": "0.1.0",
+  "description": "algorithm practice programs.",
+  "main": "index.js",
+  "author": "youjenli",
+  "license": "MIT",
+  "private": false
+}
