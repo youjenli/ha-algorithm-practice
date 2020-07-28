@@ -19,7 +19,7 @@ for (let i = 0 ; i < map.length ; i ++) {
 let track = [];
 
 if (map[0][0] == t) {
-    console.log(`Target has been found at ${track[head].x},${track[head].y}.`);
+    console.log(`Target has been found at 0,0.`);
 } else {
     track.push({
         x:0,
@@ -41,34 +41,34 @@ if (map[0][0] == t) {
     let found = false;
     do {
         for (let i = 0 ; i < addition.length && !found ; i ++) {
-            let search = {
+            let pointToSearch = {
                 x:track[head].x + addition[i].a,
                 y:track[head].y + addition[i].b,
                 step:track[head].step + Math.abs(addition[i].a) + Math.abs(addition[i].b)
             }
-            console.log(`開始搜尋 ${search.x},${search.y}`);
-            if (search.x >= 0 && search.x < c1.length /*檢查是否越界 */
-                && search.y >= 0 && search.y < c1.length) {
-                if (record[search.x][search.y] != searched) {/* 檢查是否已找過 */
-                    if (map[search.x][search.y] == b) {
-                        console.log(`${search.x},${search.y} 是障礙物，跳過`);
+            console.log(`開始搜尋 ${pointToSearch.x},${pointToSearch.y}`);
+            if (pointToSearch.x >= 0 && pointToSearch.x < c1.length /*檢查是否越界 */
+                && pointToSearch.y >= 0 && pointToSearch.y < c1.length) {
+                if (record[pointToSearch.x][pointToSearch.y] != searched) {/* 檢查是否已找過 */
+                    if (map[pointToSearch.x][pointToSearch.y] == b) {
+                        console.log(`${pointToSearch.x},${pointToSearch.y} 是障礙物，跳過`);
                         continue;
-                    } else if (map[search.x][search.y] == t) {//檢查是否已找到目標
-                        console.log(`在 ${search.x},${search.y} 找到目標，它距離原點的步數是: ${search.step}.`);
+                    } else if (map[pointToSearch.x][pointToSearch.y] == t) {//檢查是否已找到目標
+                        console.log(`在 ${pointToSearch.x},${pointToSearch.y} 找到目標，它距離原點的步數是: ${pointToSearch.step}.`);
                         found = true;
                         break;
                     } else {
-                        track.push(search);
-                        record[search.x][search.y] = searched;
+                        track.push(pointToSearch);
+                        record[pointToSearch.x][pointToSearch.y] = searched;
                         tail++;
-                        console.log(`加入 ${search.x},${search.y} step:${search.step} 到佇列中。`);
+                        console.log(`加入 ${pointToSearch.x},${pointToSearch.y} step:${pointToSearch.step} 到佇列中。`);
                     }
                 } else {
-                    console.log(`因為已找過 ${search.x},${search.y}，所以跳過這個點`);
+                    console.log(`因為已找過 ${pointToSearch.x},${pointToSearch.y}，所以跳過這個點`);
                     continue;
                 }
             } else {
-                console.log(`${search.x},${search.y} 已越界，跳過`);
+                console.log(`${pointToSearch.x},${pointToSearch.y} 已越界，跳過`);
                 continue;
             }
         }// end for
