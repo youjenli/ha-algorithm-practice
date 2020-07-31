@@ -1,6 +1,5 @@
 const readline = require('readline');
 const process = require('process');
-const { start } = require('repl');
 const rl = readline.createInterface({
     input: process.stdin,
     output: process.stdout
@@ -21,17 +20,17 @@ rl.on('line', (input) => {
         // console.log(`stop program startPoint.length = ${startPoint.length}`);
         for (let i = 0 ; i < startPoint.length ; i ++) {
             let str = ' ';
-            if (lastPathOfEachPoint[i] != undefined) {
+            if (lastPathOfEachPoint[i] !== undefined) {
                 str = `${lastPathOfEachPoint[i]}`;
             }
             console.log(`${startPoint[i]} ${destination[i]} ${distance[i]} ${str} ${pathsOfEachPoint[i]}`);
         }
         
-        // let k = lastPathOfEachPoint[0];
-        // while(k != -1) {
-        //     console.log(`路線 ${startPoint[k]} ${destination[k]} ${distance[k]}`);
-        //     k = pathsOfEachPoint[k];
-        // }
+        let k = lastPathOfEachPoint[0];
+        while(k !== undefined) {
+            console.log(`路線 ${startPoint[k]} ${destination[k]} ${distance[k]}`);
+            k = pathsOfEachPoint[k];
+        }
 
         process.exit();
     } else if (tokens.length == 2 
@@ -44,9 +43,7 @@ rl.on('line', (input) => {
                 destination = new Array(numbers[1]);
                 distance = new Array(numbers[1]);
                 lastPathOfEachPoint = new Array(numbers[0]);
-                lastPathOfEachPoint = lastPathOfEachPoint.map(() => -1);//為何沒效?
                 pathsOfEachPoint = new Array(numbers[1]);
-                pathsOfEachPoint = pathsOfEachPoint.map(() => -1);//為何沒效?
                 initialized = true;
         } else {
             console.log('invalid input');
@@ -62,7 +59,7 @@ rl.on('line', (input) => {
             destination[nextIdx] = numbers[1];
             distance[nextIdx] = numbers[2];
             
-            if (lastPathOfEachPoint[numbers[0] - 1] >= 0) {
+            if (lastPathOfEachPoint[numbers[0] - 1] !== undefined && lastPathOfEachPoint[numbers[0] - 1] >= 0) {
                 pathsOfEachPoint[nextIdx] = lastPathOfEachPoint[numbers[0] - 1];
             }
             lastPathOfEachPoint[numbers[0] - 1] = nextIdx;
