@@ -1,5 +1,6 @@
 const readline = require('readline');
 const process = require('process');
+const { start } = require('repl');
 const rl = readline.createInterface({
     input: process.stdin,
     output: process.stdout
@@ -25,6 +26,13 @@ rl.on('line', (input) => {
             }
             console.log(`${startPoint[i]} ${destination[i]} ${distance[i]} ${str} ${pathsOfEachPoint[i]}`);
         }
+        
+        // let k = lastPathOfEachPoint[0];
+        // while(k != -1) {
+        //     console.log(`路線 ${startPoint[k]} ${destination[k]} ${distance[k]}`);
+        //     k = pathsOfEachPoint[k];
+        // }
+
         process.exit();
     } else if (tokens.length == 2 
         && initialized == false) {
@@ -36,9 +44,9 @@ rl.on('line', (input) => {
                 destination = new Array(numbers[1]);
                 distance = new Array(numbers[1]);
                 lastPathOfEachPoint = new Array(numbers[0]);
-                lastPathOfEachPoint = lastPathOfEachPoint.map(() => -1);
+                lastPathOfEachPoint = lastPathOfEachPoint.map(() => -1);//為何沒效?
                 pathsOfEachPoint = new Array(numbers[1]);
-                pathsOfEachPoint = pathsOfEachPoint.map(() => -1);
+                pathsOfEachPoint = pathsOfEachPoint.map(() => -1);//為何沒效?
                 initialized = true;
         } else {
             console.log('invalid input');
