@@ -7,8 +7,14 @@
         {
             "type": "node",
             "request": "launch",
-            "name": "啟動程式",
-            "program": "${workspaceFolder}\\index.js"
+            "name": "bellman-ford-optimized",
+            "program": "${workspaceFolder}\\find-shortest-path\\Bellman-Ford-optimized.js",
+            "console": "integratedTerminal"
+            /*
+                vscode 預設的 node debug console 不接受命令列輸入，
+                因此這裡要設定為 integratedTerminal 才能透過 vscode 命令列提供程式參數。
+                詳見： https://code.visualstudio.com/docs/nodejs/nodejs-debugging#_node-console
+            */
         }
     ]
 }
