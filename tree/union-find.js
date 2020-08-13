@@ -42,40 +42,18 @@ rl.on('line', (input) => {
             process.exit();
         }
     } else if (tokens.length == 2 && initailized == true) {
-        let ancestor = parseInt(tokens[0]), descendent = parseInt(tokens[1]);
-        if (!isNaN(ancestor) && !isNaN(descendent)
-                && ancestor <= items.length && descendent <= items.length) {
-                ancestor --, descendent --;
+        let parent = parseInt(tokens[0]), child = parseInt(tokens[1]);
+        if (!isNaN(parent) && !isNaN(child)
+                && parent <= items.length && child <= items.length) {
+                parent --, child --;
 
-                const setParent = (idx) => {
-                    let promise = null;
-                    if (items[idx] != idx) {
-                        promise = new Promise(resolve => {
-                            setTimeout(() => {
-                                setParent(items[idx])
-                                    .then(() => {
-                                        resolve();
-                                    });
-                            }, 0);
-                        })
-                    }
-                    if (promise != null) {
-                        promise.then(() => {
-                            console.log(`將 items[${idx}] 從 ${items[idx]} 設為 ${ancestor}`);
-                            items[idx] = ancestor;
-                            console.log(`${items}`);
-                        });
-                    } else {
-                        return new Promise(resolve => {
-                            console.log(`將 items[${idx}] 從 ${items[idx]} 設為 ${ancestor}`);
-                            items[idx] = ancestor;
-                            console.log(`${items}`);
-                            resolve();
-                        });
-                    }
-                    return promise;
+                if (items[child] != child) {
+                    console.log(`將 items[items[${child}]] 從 ${items[items[child]]} 設為 ${items[parent]}`);
+                    items[items[child]] = items[parent];
                 }
-                setParent(descendent)
+                console.log(`將 items[${child}] 從 ${items[child]} 設為 ${items[parent]}`);
+                items[child] = items[parent];
+                console.log(`${items}`);
         } else {
             console.error('invalid input.');
             process.exit();
