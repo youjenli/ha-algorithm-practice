@@ -15,6 +15,21 @@
                 因此這裡要設定為 integratedTerminal 才能透過 vscode 命令列提供程式參數。
                 詳見： https://code.visualstudio.com/docs/nodejs/nodejs-debugging#_node-console
             */
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "minimum-spanning-tree",
+            "program": "${workspaceFolder}\\great-algorithms\\minimum-spanning-tree.js",
+            "console": "integratedTerminal",
+            /*
+                vscode 預設的 node debug console 不接受命令列輸入，
+                因此這裡要設定為 integratedTerminal 才能透過 vscode 命令列提供程式參數。
+                詳見： https://code.visualstudio.com/docs/nodejs/nodejs-debugging#_node-console
+            */
+            "args":  ["--use-strict", "--harmony"]
+            /* 執行此程式時，要加上參數 --harmony 和 --use-strict，否則後面遞迴部分可能導致程式掛掉。
+            */
         }
     ]
 }
